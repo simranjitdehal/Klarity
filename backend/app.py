@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
+# from fastapi.responses import HTMLResponse
+# from fastapi.templating import Jinja2Templates
+# from fastapi.staticfiles import StaticFiles
 from models import IngestPayload, AnalyzeResponse
 from ai_service import generate_analysis
 from fastapi.middleware.cors import CORSMiddleware
@@ -19,11 +19,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-BASE_DIR = Path(__file__).resolve().parent
-FRONTEND_STATIC = BASE_DIR.parent / "frontend" / "static"
+# BASE_DIR = Path(__file__).resolve().parent
+# FRONTEND_STATIC = BASE_DIR.parent / "frontend" / "static"
 
-app.mount("/static", StaticFiles(directory=FRONTEND_STATIC), name="static")
-templates = Jinja2Templates(directory="frontend/templates")
+# app.mount("/static", StaticFiles(directory=FRONTEND_STATIC), name="static")
+# templates = Jinja2Templates(directory="frontend/templates")
 
 latest_analysis = None
 
@@ -35,9 +35,9 @@ def ingest(payload: IngestPayload):
     return {"analysis": latest_analysis}
 
 
-@app.get("/")
-def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+# @app.get("/")
+# def home(request: Request):
+#     return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/latest")
