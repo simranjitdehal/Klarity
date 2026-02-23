@@ -3,7 +3,7 @@ async function sendLogs() {
 
     const parsedInput = JSON.parse(rawInput); // convert textarea text into object
 
-    const response = await fetch("http://127.0.0.1:8000/ingest", {
+    const response = await fetch("klarity-production-6a25.up.railway.app/ingest", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
