@@ -13,7 +13,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://klarityai.up.railway.app", "http://localhost:3000"],  # restrict later
+    allow_origins=["https://klarityai.up.railway.app", "http://127.0.0.1:8000", "http://localhost:3000"],  # restrict later
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
