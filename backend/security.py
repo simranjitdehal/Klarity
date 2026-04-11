@@ -1,12 +1,21 @@
-import secrets
-import bcrypt
+# import secrets
+# import bcrypt
 
-def generate_api_key() -> str:
-    return secrets.token_hex(20)
+# def generate_api_key() -> str:
+#     return secrets.token_hex(20)
 
-def hash_api_key(api_key: str) -> str:
-    hashed = bcrypt.hashpw(api_key.encode(), bcrypt.gensalt())
-    return hashed.decode()
+# def hash_api_key(api_key: str) -> str:
+#     hashed = bcrypt.hashpw(api_key.encode(), bcrypt.gensalt())
+#     return hashed.decode()
 
-def verify_api_key(api_key: str, hashed: str) -> bool:
-    return bcrypt.checkpw(api_key.encode(), hashed.encode())
+# def verify_api_key(api_key: str, hashed: str) -> bool:
+#     return bcrypt.checkpw(api_key.encode(), hashed.encode())
+from db import SessionLocal
+from models import incoming_log
+
+db = SessionLocal()
+
+logs = db.query(incoming_log).all()
+
+for log in logs:
+    print(log.__dict__)

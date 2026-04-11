@@ -1,21 +1,20 @@
 import os
-import mysql.connector
-from mysql.connector import Error
 from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
 
 load_dotenv()
 
-def get_db_connection():
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./klarity.db")
+
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {})
+
+SessionLocal = sessionmaker(bind=engine)
+Base = declarative_base()
+
+def get_db():
+    db = SessionLocal()
     try:
-        conn = mysql.connector.connect(
-            host=os.getenv("DB_HOST"),
-            port=int(os.getenv("DB_PORT", 3306)),
-            user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASSWORD"),
-            database=os.getenv("DB_NAME"),
-            autocommit=True
-        )
-        return conn
-    except Error as e:
-        # Fail fast — DB not available means system is not usable
-        raise RuntimeError(f"Database connection failed: {e}")
+        yield db
+    finally:
+        db.close()
