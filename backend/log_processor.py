@@ -8,7 +8,7 @@ def extract_exception(raw_log: str):
     for line in reversed(lines):
         line = line.strip()
 
-        match = pattern.match(line)   # 👈 use match instead of search
+        match = pattern.match(line)   #use match instead of search
         if match:
             exception_type = match.group(1)
             exception_message = match.group(3) or ""
