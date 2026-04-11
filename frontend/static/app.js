@@ -39,7 +39,7 @@
 function sendLogs() {
     fetch("http://127.0.0.1:8000/logs/completed", {
         headers: {
-            "x-api-key": "ske985d2519612d30974583064f8a5c84f"
+            "x-api-key": "PASTE_YOPUR_API_KEY_HERE" // Replace with your actual API key
         }
     })
     .then(res => res.json())
