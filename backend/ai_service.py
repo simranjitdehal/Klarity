@@ -188,7 +188,7 @@ Function: {logs.function}
     except Exception as e:
         print("AI ERROR:", e)
 
-        # 🔥 fallback (never break worker)
+        #fallback response if AI fails
         return {
             "ai_summary": "AI analysis failed",
             "probable_cause": None,
